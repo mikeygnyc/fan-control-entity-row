@@ -2,7 +2,7 @@ window.customCards = window.customCards || [];
 window.customCards.push({
   type: "fan-control-entity-row",
   name: "fan control entity row",
-  description: "A plugin to display your fan controls in a button row.",
+  description: "A plugin to display your Lutron Caseta fan controls in a button row.",
   preview: false,
 });
 
@@ -157,13 +157,13 @@ class CustomFanRow extends Polymer.Element {
 		let offstate;
 		
 		if (stateObj && stateObj.attributes) {
-			if (stateObj.state == 'on' && stateObj.attributes.speed == 'low') {
+			if (stateObj.state == 'on' && stateObj.attributes.percentage == '25') {
 				low = 'on';
-			} else if (stateObj.state == 'on' && stateObj.attributes.speed == 'medium') {
+			} else if (stateObj.state == 'on' && stateObj.attributes.percentage == '50') {
 				med = 'on';
-			} else if (stateObj.state == 'on' && stateObj.attributes.speed == 'high') {
+			} else if (stateObj.state == 'on' && stateObj.attributes.percentage == '100') {
 				high = 'on';
-			} else if (stateObj.state == 'on' && stateObj.attributes.speed == 'medium_high') {
+			} else if (stateObj.state == 'on' && stateObj.attributes.percentage == '75') {
 					medium_high = 'on';
 			} else {
 				offstate = 'on';
