@@ -1,7 +1,7 @@
 window.customCards = window.customCards || [];
 window.customCards.push({
-  type: "fan-control-entity-row",
-  name: "fan control entity row",
+  type: "lutron-caseta-fan-control-entity-row",
+  name: "lutron caseta fan control entity row",
   description: "A plugin to display your Lutron Caseta fan controls in a button row.",
   preview: false,
 });
@@ -340,4 +340,4 @@ class CustomFanRow extends Polymer.Element {
 	}
 }
 	
-customElements.define('fan-control-entity-row', CustomFanRow);
+customElements.define('lutron-caseta-fan-control-entity-row', CustomFanRow);
