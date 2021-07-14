@@ -45,6 +45,12 @@ class CustomFanRow extends Polymer.Element {
 						disabled='[[_midLeftState]]'>[[_midLeftText]]</button>
 					<button
 						class='speed'
+						style='[[_midColor]];min-width:[[_width]];max-width:[[_width]];height:[[_height]];[[_hideMid]]'
+						toggles name="[[_midName]]"
+						on-click='setSpeed'
+						disabled='[[_midState]]'>[[_midText]]</button>
+					<button
+						class='speed'
 						style='[[_midRightColor]];min-width:[[_width]];max-width:[[_width]];height:[[_height]];[[_hideMidRight]]'
 						toggles name="[[_midRightName]]"
 						on-click='setSpeed'
@@ -83,6 +89,7 @@ class CustomFanRow extends Polymer.Element {
 			_midRightName: String,
 			_rightName: String,
 			_hideMidLeft: String,
+			_hideMid: String,
 			_hideMidRight: String,
 			_leftState: Boolean,
 			_midLeftState: Boolean,
@@ -127,12 +134,14 @@ class CustomFanRow extends Polymer.Element {
 		const buttonHeight = config.height;
 		const custOnLowClr = config.isOnLowColor;
 		const custOnMedClr = config.isOnMedColor;
+		const custOnMedHiClr = config.isOnMedHiColor;
 		const custOnHiClr = config.isOnHiColor;
 		const custOffSpdClr = config.buttonInactiveColor;
 		const custOffClr = config.isOffColor;
 		const custOffTxt = config.customOffText;
 		const custLowTxt = config.customLowText;
 		const custMedTxt = config.customMedText;
+		const custMedHiTxt = config.customMedHiText;
 		const custHiTxt = config.customHiText;
 		
 		let speed;
@@ -143,6 +152,7 @@ class CustomFanRow extends Polymer.Element {
 		let low;
 		let med;
 		let high;
+		let medium_high;
 		let offstate;
 		
 		if (stateObj && stateObj.attributes) {
@@ -152,6 +162,8 @@ class CustomFanRow extends Polymer.Element {
 				med = 'on';
 			} else if (stateObj.state == 'on' && stateObj.attributes.speed == 'high') {
 				high = 'on';
+			} else if (stateObj.state == 'on' && stateObj.attributes.speed == 'medium_high') {
+					medium_high = 'on';
 			} else {
 				offstate = 'on';
 			}
@@ -161,7 +173,7 @@ class CustomFanRow extends Polymer.Element {
 		let medcolor;
 		let hicolor;
 		let offcolor;
-				
+		let medhicolor;
 		if (custTheme) {
 			if (low == 'on') {
 				lowcolor = 'background-color:' + custOnLowClr;
@@ -180,7 +192,11 @@ class CustomFanRow extends Polymer.Element {
 			} else {
 				hicolor = 'background-color:' + custOffSpdClr;
 			}
-		
+			if (medium_high == 'on') {
+				medhicolor = 'background-color:'  + custOnMedHiClr;
+			} else {
+				medhicolor = 'background-color:' + custOffSpdClr;
+			}		
 			if (offstate == 'on') {
 				offcolor = 'background-color:'  + custOffClr;
 			} else {
@@ -206,7 +222,11 @@ class CustomFanRow extends Polymer.Element {
 			} else {
 				hicolor = 'background-color: var(--disabled-text-color)';
 			}
-		
+			if (medium_high == 'on') {
+				medhicolor = 'background-color: var(--primary-color)';
+			} else {
+				medhicolor = 'background-color: var(--disabled-text-color)';
+			}
 			if (offstate == 'on') {
 				offcolor = 'background-color: var(--primary-color)';
 			} else {
@@ -218,12 +238,15 @@ class CustomFanRow extends Polymer.Element {
 		let lowtext = custLowTxt;
 		let medtext = custMedTxt;
 		let hitext = custHiTxt;
+		let medhitext = custMedHiTxt;
+
 		
 		let buttonwidth = buttonWidth;
 		let buttonheight = buttonHeight;
 		
 		let hiname = 'high';
 		let medname = 'medium';
+		let medhiname = 'medium_high';
 		let lowname = 'low';
 		let offname = 'off';
 		
@@ -242,46 +265,56 @@ class CustomFanRow extends Polymer.Element {
 				_stateObj: stateObj,
 				_leftState: offstate == 'on',
 				_midLeftState: low == 'on',
-				_midRightState: med == 'on',
+				_midState: med == 'on',
+				_midRightState: medium_high == 'on',
 				_rightState: high == 'on',
 				_width: buttonwidth,
 				_height: buttonheight,
 				_leftColor: offcolor,
 				_midLeftColor: lowcolor,
-				_midRightColor: medcolor,
+				_midColor: medcolor,
+				_midRightColor: medhicolor,
 				_rightColor: hicolor,
 				_leftText: offtext,
 				_midLeftText: lowtext,
-				_midRightText: medtext,
+				_midText: medtext,
+				_midRightText: medhitext,
 				_rightText: hitext,
 				_leftName: offname,
 				_midLeftName: lowname,
-				_midRightName: medname,
+				_midName: medname,
+				_midRightName: medhiname,
 				_rightName: hiname,
 				_hideMidLeft: nohide,
 				_hideMidRight: hidemedium,
+				_hideMid: hidemedium
 			});
 		} else {
 			this.setProperties({
 				_stateObj: stateObj,
 				_leftState: high == 'on',
-				_midLeftState: med == 'on',
+				_midLeftState: medium_high == 'on',
+				_midState: med == 'on',
 				_midRightState: low == 'on',
 				_rightState: offstate == 'on',
 				_width: buttonwidth,
 				_height: buttonheight,
 				_leftColor: hicolor,
-				_midLeftColor: medcolor,
+				_midLeftColor: medhicolor,
+				_midColor: medcolor,
 				_midRightColor: lowcolor,
 				_rightColor: offcolor,
 				_leftText: hitext,
-				_midLeftText: medtext,
+				_midLeftText: medhitext,
+				_midText: medtext,
 				_midRightText: lowtext,
 				_rightText: offtext,
 				_leftName: hiname,
-				_midLeftName: medname,
+				_midLeftName: medhiname,
+				_midName: medname,
 				_midRightName: lowname,
 				_rightName: offname,
+				_hideMid: hidemedium,
 				_hideMidRight: nohide,
 				_hideMidLeft: hidemedium,
 			});

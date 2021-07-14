@@ -1,14 +1,19 @@
-# Fan Control Entity Row
+# Fan Control Entity Row - Caseta 5 Button Fork
+
+This is a fork of https://github.com/finity69x2/fan-control-entity-row that supports a Caseta fan switch.
+
+## Original Readme:
 
 ## This is an element to add a fan control row to Home Assistant.
 
 ## This plugin is only valid for use with fans that still use a speed list in the fan configuration. That fan control model is deprecated in versions of Home Assistant 2021.3.x and later. For HA versions 2021.3.x and later use fan-percent-button-row or fan-mode-button-row if your fan has been updated to use the new control methods.
 
+
 It uses the code that can be found in my fan control package @ https://github.com/finity69x2/Home-Assistant/blob/master/packages/fan_package.yaml
 
 UPDATE:
 
-I've added the ability to hide the medium speed button to turn it into a two speed fan control, as well. To use it in this mode then your fan speeds must be designated low and high since it simply removes the medium speed button.
+I've added the ability to hide the medium speed button to turn it into a two speed fan control, as well. To use it in this mode then your fan speeds must be designated low and high since it simply removes the medium speed buttons.
 
 Installation:
 
